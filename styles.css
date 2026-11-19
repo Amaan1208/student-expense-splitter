@@ -185,7 +185,7 @@ select { appearance: none; -webkit-appearance: none; padding-right: 36px; backgr
 .cat-top span:first-child { font-weight: 600; text-transform: capitalize; }
 
 /* Empty states with stickers */
-.empty { display: flex; align-items: center; gap: 16px; padding: 8px 20px 16px; color: var(--muted); }
+.rows > li.empty, .empty { justify-content: flex-start; display: flex; align-items: center; gap: 16px; padding: 8px 20px 16px; color: var(--muted); }
 .empty img { width: 88px; flex: none; transform: rotate(-5deg); }
 .empty p { font-size: 15px; max-width: 28ch; }
 
