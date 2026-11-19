@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Expense Splitter</title>
+<meta name="description" content="Split shared student expenses equally, by percentage or by exact amounts, then settle up with the fewest payments.">
+<meta name="theme-color" content="#F5F5F7">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="#top" aria-label="Expense Splitter">
+      <span class="wordmark">WEBNEST<i>.</i></span>
+      <span class="brand-sub">Expense Splitter</span>
+    </a>
+    <div class="bar-actions">
+      <button class="btn btn-quiet" id="btn-demo" type="button">Load demo</button>
+      <button class="btn btn-quiet" id="btn-reset" type="button">Reset</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>Split it.<br>Settle it.</h1>
+      <p>Add the people, add what was spent, and get the fewest payments that make everyone even.</p>
+    </div>
+    <img class="sticker s-hero" src="stickers/s1.webp" width="502" height="520" alt="" decoding="async">
+  </section>
+
+  <div class="grid">
+    <div class="col">
+      <section class="group" aria-labelledby="h-students">
+        <div class="group-head"><h2 id="h-students">Students</h2><span class="count" id="student-count">0</span></div>
+        <ul class="chips" id="student-list"></ul>
+        <form class="inline-form" id="student-form" autocomplete="off">
+          <label class="sr" for="student-name">Student name</label>
+          <input id="student-name" type="text" placeholder="Add a name" maxlength="24" enterkeyhint="done">
+          <button class="btn btn-primary" type="submit">Add</button>
+        </form>
+        <p class="field-error" id="student-error" role="alert" hidden></p>
+      </section>
+
+      <section class="group" aria-labelledby="h-expense">
+        <div class="group-head"><h2 id="h-expense">New expense</h2></div>
+        <form class="form" id="expense-form" autocomplete="off" novalidate>
+          <div class="field">
+            <label for="e-desc">What was it for</label>
+            <input id="e-desc" type="text" placeholder="Dinner" maxlength="40">
+          </div>
+          <div class="two">
+            <div class="field">
+              <label for="e-amount">Amount</label>
+              <div class="money"><span aria-hidden="true">₹</span><input id="e-amount" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00"></div>
+            </div>
+            <div class="field">
+              <label for="e-payer">Paid by</label>
+              <select id="e-payer"></select>
+            </div>
+          </div>
+          <div class="field">
+            <span class="label" id="l-cat">Category</span>
+            <div class="seg seg-wrap" id="seg-cat" role="radiogroup" aria-labelledby="l-cat"></div>
+          </div>
+          <div class="field">
+            <span class="label" id="l-split">How to split</span>
+            <div class="seg" id="seg-split" role="radiogroup" aria-labelledby="l-split">
+              <button type="button" role="radio" aria-checked="true" data-split="equal">Equal</button>
+              <button type="button" role="radio" aria-checked="false" data-split="percent">Percent</button>
+              <button type="button" role="radio" aria-checked="false" data-split="exact">Exact</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="label" id="l-who">Who shares it</span>
+            <ul class="who" id="who" aria-labelledby="l-who"></ul>
+            <p class="hint" id="split-hint" aria-live="polite"></p>
+          </div>
+          <p class="field-error" id="expense-error" role="alert" hidden></p>
+          <button class="btn btn-primary btn-wide" type="submit">Add expense</button>
+        </form>
+      </section>
+    </div>
+
+    <div class="col">
+      <section class="group" aria-labelledby="h-settle">
+        <div class="group-head">
+          <h2 id="h-settle">Settle up</h2>
+          <button class="btn btn-primary btn-sm" id="btn-settle" type="button">Settle up</button>
+        </div>
+        <p class="stale" id="stale" hidden>Expenses changed. Tap Settle up to recalculate.</p>
+        <ul class="rows" id="debts"></ul>
+        <div class="sub-head">Balances</div>
+        <ul class="rows" id="balances"></ul>
+      </section>
+
+      <section class="group" aria-labelledby="h-stats">
+        <div class="group-head"><h2 id="h-stats">Stats</h2></div>
+        <div id="stats"></div>
+      </section>
+
+      <section class="group" aria-labelledby="h-list">
+        <div class="group-head"><h2 id="h-list">Expenses</h2><span class="count" id="expense-count">0</span></div>
+        <ul class="rows" id="expenses"></ul>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <p>Port of a Java OOP project. Same rules, now clickable.</p>
+  <a href="https://github.com/Amaan1208/student-expense-splitter" target="_blank" rel="noopener">Source on GitHub</a>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="splitter.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
